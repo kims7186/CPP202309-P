@@ -1,6 +1,8 @@
 #include <windows.h>  // 콘솔창 clear 및 시간 지연을 주기위한 헤더파일
+
 #include <iostream>
 #include <vector>
+
 #include "Player.h"
 
 using namespace std;
@@ -48,9 +50,18 @@ void DisplayMenu() {
       break;
     case 2:
       cout << "포메이션 정보 입력/수정/삭제 화면 입니다.\n";
+
+      // 구현 예정
+      cout << "아직 기능이 구현되지 않았습니다. 메인메뉴로 돌아갑니다.\n";
+      DisplayMenu();
+      //
       break;
     case 3:
       cout << "스쿼드메이커 화면 입니다.\n";
+      // 구현 예정
+      cout << "아직 기능이 구현되지 않았습니다. 메인메뉴로 돌아갑니다.\n";
+      DisplayMenu();
+      //
       break;
     default:
       cout << "잘못된 입력입니다.다시 선택 해주세요 .\n\n";

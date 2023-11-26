@@ -1,5 +1,6 @@
 #include "Player.h"
-#include <iomanip> setw()사용하기 위함
+
+#include <iomanip>  //setw()사용하기 위함
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,8 +19,8 @@ void Player::InsertPlayer(vector<Player> &players) {
   cout << "플레이어를 추가합니다.\n\n";
   cout << "플레이어의 정보를 이름/선호 포지션/비선호 포지션 순으로 "
           "입력하세요.\n\n";
-  cout << "선호/비선호 포지션은 공격/중앙/수비/골키퍼/없음 중에서 입력해 "
-          "주세요\n\n";
+  cout << "선호/비선호 포지션은 공격/중앙/수비/골키퍼/없음 중에서 "
+          "입력해주세요\n\n";
   Player input;
   // 이름 입력
   cout << "이름: ";
