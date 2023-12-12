@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+#include "Formation.h"
 #include "Player.h"
 
 using namespace std;
@@ -12,15 +13,19 @@ using namespace std;
 // 함수 선언
 void DisplayMenu();  //사용자의 요구에 따라 원하는 메뉴를 출력
 void loadPlayersInfo(vector<Player> &players);  // 기존 사용자 정보 불러오기
+void loadFormationsInfo(vector<Formation> &formations);
 void PlayerMenu();
+void FormationMenu();
 
-vector<Player> players;  //
+vector<Player> players;        //플레이어의 정보가 저장된 배열
+vector<Formation> formations;  // 포메이션의 정보가 저장된 배열
 
 int main() {
   cout << "------스쿼드 메이커 프로그램을 시작합니다.------- \n\n";
   cout << "-------------기존 정보를 불러옵니다--------------\n\n";
 
-  loadPlayersInfo(players);  // 기존 정보 불러오기
+  loadPlayersInfo(players);        // 기존 정보 불러오기
+  loadFormationsInfo(formations);  // 기존 포메이션 정보 불러오기
 
   DisplayMenu();  //메인 메뉴 출력
 
@@ -49,12 +54,7 @@ void DisplayMenu() {
       PlayerMenu();
       break;
     case 2:
-      cout << "포메이션 정보 입력/수정/삭제 화면 입니다.\n";
-
-      // 구현 예정
-      cout << "아직 기능이 구현되지 않았습니다. 메인메뉴로 돌아갑니다.\n";
-      DisplayMenu();
-      //
+      FormationMenu();
       break;
     case 3:
       cout << "스쿼드메이커 화면 입니다.\n";
@@ -84,7 +84,24 @@ void loadPlayersInfo(vector<Player> &players) {
   cout << "플레이어 정보 로드 완료\n\n";
   cout << "--------------------------------------\n";
   Sleep(1000);
-  system("cls");
+  system("cls");  // 콘솔창 초기화
+}
+//저장된 포메이션 정보
+void loadFormationsInfo(vector<Formation> &formations) {
+  // formationName(""), defenders(0), midfielders(0), forwards(0)
+  formations.push_back(Formation("343", 3, 4, 3));
+  formations.push_back(Formation("352", 3, 5, 2));
+  formations.push_back(Formation("433", 4, 3, 3));
+  formations.push_back(Formation("42(31)", 4, 2, 4));
+  formations.push_back(Formation("442", 4, 4, 2));
+  formations.push_back(Formation("541", 5, 4, 1));
+  formations.push_back(Formation("523", 5, 2, 3));
+
+  Sleep(1500);
+  cout << "포메이션 정보 로드 완료\n\n";
+  cout << "--------------------------------------\n";
+  Sleep(1000);
+  system("cls");  // 콘솔창 초기화
 }
 
 void PlayerMenu() {
@@ -119,5 +136,36 @@ void PlayerMenu() {
     default:
       cout << "잘못된 입력입니다.다시 선택 해주세요 .\n\n";
       PlayerMenu();
+  }
+}
+
+void FormationMenu() {
+  cout << "\n\n포메이션 정보 입력/수정/삭제 화면 입니다. \n\n";
+  Formation formation;
+  formation.DisplayFormation(formations);  //현재 플레이어 정보 출력
+  cout << "메뉴를 선택해주세요.\n\n";
+  cout << "0.메인으로 돌아가기 \n";
+  cout << "1.포메이션 정보 입력\n";
+  cout << "2.포메이션 정보 수정\n";
+  cout << "3.포메이션 정보 삭제\n";
+  cout << "\n------------------------------------------------------\n";
+  cout << "사용자 입력:";
+  int user_input;
+  cin >> user_input;
+  switch (user_input) {
+    case 0:
+      DisplayMenu();  //메인 메뉴로 돌아갑니다
+      break;
+    case 1:
+    case 2:
+    case 3:
+      system("cls");  //콘솔창 초기화
+      cout << "아직 기능이 구현되지 않았습니다.\n";
+      cout << "다시 선택해 주세요.\n";
+      FormationMenu();  // 다시 입력받기
+      break;
+    default:
+      cout << "잘못된 입력입니다.다시 선택 해주세요 .\n\n";
+      FormationMenu();
   }
 }
