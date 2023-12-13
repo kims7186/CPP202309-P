@@ -16,24 +16,6 @@ Formation::Formation(std ::string formationName, int defenders, int midfielders,
   this->forwards = forwards;
 }
 
-// 유효한 포메이션 입력을 받기 위한 함수 구현
-std::string Formation::GetValidFormation(const std::string& prompt) {
-  std::string formation;
-  while (true) {
-    std::cout << prompt;
-    std::cin >> formation;
-
-    if (formation == "343" || formation == "352" || formation == "433" ||
-        formation == "4231" || formation == "442" || formation == "541" ||
-        formation == "523") {
-      break;
-    } else {
-      std::cout << "유효하지 않은 포메이션입니다. 유효한 값을 입력해주세요.\n";
-    }
-  }
-  return formation;
-}
-
 // 현재 포메이션 정보를 표시하는 함수 구현
 void Formation::DisplayFormation(const vector<Formation>& formations) {
   // 현재 포메이션 정보를 출력하는 함수
@@ -48,4 +30,29 @@ void Formation::DisplayFormation(const vector<Formation>& formations) {
   }
   cout << endl;
   cout << "------------------------------------------\n";
+}
+
+void Formation::InsertFormation(vector<Formation>& formations) {
+  string formationName;
+  cout << "추가할 포메이션의 이름:\n";
+  cin >> formationName;
+  int def, mid, forward;
+  while (true) {
+    cout << "수비수 숫자:\n";
+    cin >> def;
+    cout << "미드필더 숫자\n";
+    cin >> mid;
+    cout << "공격수 숫자\n";
+    cin >> forward;
+    if (def + mid + forward == 10) {
+      formations.push_back(Formation(formationName, def, mid, forward));
+      cout << "새로운 포메이션이 추가되었습니다.\n";
+      break;
+    } 
+    else {
+      cout << "필드 플레이어는 10명 입니다.다시 입력해주세요\n";
+      cout << "현재 필드 플레이어 숫자 :" << def + mid + forward<<endl;
+    }
+  }
+
 }

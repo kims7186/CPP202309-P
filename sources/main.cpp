@@ -1,6 +1,7 @@
 #include <windows.h>  // 콘솔창 clear 및 시간 지연을 주기위한 헤더파일
 
 #include <iostream>
+#include <limits>
 #include <vector>
 
 #include "Formation.h"
@@ -32,19 +33,36 @@ int main() {
   return 0;
 }
 void DisplayMenu() {
-  //메인메뉴 출력
-  cout << "메인 메뉴입니다.\n\n";
-  cout << "\n------------------------------------------------------\n";
-  cout << "항목을 선택해주세요.\n\n";
-  cout << "0.종료\n";
-  cout << "1.선수 정보 입력/수정/삭제\n";
-  cout << "2.포메이션 정보 입력/수정/삭제\n";
-  cout << "3.스쿼드메이커\n";
-  cout << "\n------------------------------------------------------\n";
-  cout << "사용자 입력:";
   int user_input;
-  cin >> user_input;
+  while (true) {
+    //메인메뉴 출력
+    cout << "메인 메뉴입니다.\n\n";
+    cout << "\n------------------------------------------------------\n";
+    cout << "항목을 선택해주세요.\n\n";
+    cout << "0.종료\n";
+    cout << "1.선수 정보 입력/수정/삭제\n";
+    cout << "2.포메이션 정보 입력/수정/삭제\n";
+    cout << "3.스쿼드메이커\n";
+    cout << "\n------------------------------------------------------\n";
+
+    try {
+      cout << "사용자 입력:";
+      cin >> user_input;
+      if (cin.fail()) {
+        cin.clear();  // 오류 플래그 초기화
+        cin.ignore(200, '\n');
+        throw runtime_error("잘못된 입력입니다.다시 입력해주세요.\n");
+      } else {
+        break;
+      }
+    } catch (const exception &e) {
+      system("cls");
+      cout << e.what();
+    }
+  }
+
   system("cls");  //콘솔창 clear
+
   switch (user_input) {
     case 0:
       cout << "프로그램을 종료합니다.\n";
@@ -61,10 +79,9 @@ void DisplayMenu() {
       // 구현 예정
       cout << "아직 기능이 구현되지 않았습니다. 메인메뉴로 돌아갑니다.\n";
       DisplayMenu();
-      //
       break;
     default:
-      cout << "잘못된 입력입니다.다시 선택 해주세요 .\n\n";
+      cout << "잘못된 입력입니다.다시 입력해주세요.\n";
       DisplayMenu();
   }
 }
@@ -157,6 +174,8 @@ void FormationMenu() {
       DisplayMenu();  //메인 메뉴로 돌아갑니다
       break;
     case 1:
+      formation.InsertFormation(formations);
+      break;
     case 2:
     case 3:
       system("cls");  //콘솔창 초기화
