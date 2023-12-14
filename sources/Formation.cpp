@@ -44,15 +44,21 @@ void Formation::InsertFormation(vector<Formation>& formations) {
     cin >> mid;
     cout << "공격수 숫자\n";
     cin >> forward;
-    if (def + mid + forward == 10) {
-      formations.push_back(Formation(formationName, def, mid, forward));
-      cout << "새로운 포메이션이 추가되었습니다.\n";
-      break;
-    } 
-    else {
-      cout << "필드 플레이어는 10명 입니다.다시 입력해주세요\n";
-      cout << "현재 필드 플레이어 숫자 :" << def + mid + forward<<endl;
+    if (def > 0 && mid > 0 && forward > 0) {
+      if (def + mid + forward == 10) {
+        formations.push_back(Formation(formationName, def, mid, forward));
+        cout << "새로운 포메이션이 추가되었습니다.\n";
+        break;
+      } else {
+        cout << "필드 플레이어는 10명 입니다.다시 입력해주세요\n";
+        cout << "현재 필드 플레이어 숫자 :" << def + mid + forward << endl;
+      }
+    } else {
+      cout << "각 포지션의 플레이어 숫자는 최소 한명이여야 합니다. 다시 "
+              "입력해주세요 \n";
     }
   }
+}
+void Formation::EditFormation(vector<Formation>& formations) {
 
 }
