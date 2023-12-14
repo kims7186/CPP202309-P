@@ -8,7 +8,12 @@
 // 생성자 정의와 초기화 목록 사용
 Player::Player() {}
 Player::Player(string name, string pre_pos, string non_pre_pos) {
-  this->name = name;
+  if (name.size() < 3) {
+    name = " " + name;
+  } else {
+    this->name = name;
+  }
+
   this->pre_pos = pre_pos;
   this->non_pre_pos = non_pre_pos;
 }
