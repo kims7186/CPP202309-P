@@ -1,11 +1,13 @@
 #include <windows.h>  // 콘솔창 clear 및 시간 지연을 주기위한 헤더파일
 
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <vector>
-#include <fstream>
+
 #include "Formation.h"
 #include "Player.h"
+#include "FunctionManager.h"
 
 using namespace std;
 
@@ -26,7 +28,7 @@ int main() {
   cout << "----스쿼드 메이커 프로그램을 시작합니다.------ \n\n";
   cout << "------------기존 정보를 불러옵니다-------------\n\n";
 
-  loadPlayersInfo(players);        // 기존 정보 불러오기
+  loadPlayersInfo(players);  // 기존 정보 불러오기
   loadPlayersInfo("Blueveins.txt");
   loadFormationsInfo(formations);  // 기존 포메이션 정보 불러오기
 
@@ -106,8 +108,7 @@ void loadPlayersInfo(vector<Player> &players) {
   system("cls");  // 콘솔창 초기화
 }
 void loadPlayersInfo(string filename) {
-
-  // 플레이어 정보가 저장된 파일 읽기 
+  // 플레이어 정보가 저장된 파일 읽기
   ifstream is{filename};
   if (!is) {
     cerr << "파일 오픈에 실패하였습니다." << endl;
@@ -115,16 +116,14 @@ void loadPlayersInfo(string filename) {
     cout << "프로그램을 종료합니다\n";
     exit(1);
   }
-  string txt_name, txt_pre, txt_non_pre; //파일의 1행에 담긴 선수 정보(이름,선호,비선호)
+  string txt_name, txt_pre,
+      txt_non_pre;  //파일의 1행에 담긴 선수 정보(이름,선호,비선호)
   while (is >> txt_name >> txt_pre >> txt_non_pre) {
     players.push_back(Player(txt_name, txt_pre, txt_non_pre));
   }
 
-
-
-
   Sleep(1500);
-  cout << filename<<"파일의 플레이어 정보 로드 완료\n\n";
+  cout << filename << "파일의 플레이어 정보 로드 완료\n\n";
   cout << "------------------------------------------------\n";
   Sleep(1000);
   system("cls");  // 콘솔창 초기화
@@ -149,8 +148,8 @@ void loadFormationsInfo(vector<Formation> &formations) {
 
 void PlayerMenu() {
   cout << "\n\n선수 정보 입력/수정/삭제 화면 입니다. \n\n";
-  Player player;
-  player.GetInformation(players);  //현재 플레이어 정보 출력
+  // Player player;
+  GetInformation(players);  //현재 플레이어 정보 출력
   cout << "메뉴를 선택해주세요.\n\n";
   cout << "0.메인으로 돌아가기 \n";
   cout << "1.선수 정보 입력\n";
@@ -165,15 +164,15 @@ void PlayerMenu() {
       DisplayMenu();  //메인 메뉴로 돌아갑니다
       break;
     case 1:
-      player.InsertPlayer(players);
+      InsertPlayer(players);
       PlayerMenu();
       break;
     case 2:
-      player.EditPlayer(players);
+      EditPlayer(players);
       PlayerMenu();
       break;
     case 3:
-      player.DeletePlayer(players);
+      DeletePlayer(players);
       PlayerMenu();
       break;
     default:
@@ -184,8 +183,8 @@ void PlayerMenu() {
 
 void FormationMenu() {
   cout << "\n\n포메이션 정보 입력/수정/삭제 화면 입니다. \n\n";
-  Formation formation;
-  formation.DisplayFormation(formations);  //현재 플레이어 정보 출력
+  // Formation formation;
+  DisplayFormation(formations);  //현재 플레이어 정보 출력
   cout << "메뉴를 선택해주세요.\n\n";
   cout << "0.메인으로 돌아가기 \n";
   cout << "1.포메이션 정보 입력\n";
@@ -200,14 +199,14 @@ void FormationMenu() {
       DisplayMenu();  //메인 메뉴로 돌아갑니다
       break;
     case 1:
-      formation.InsertFormation(formations);
+      InsertFormation(formations);
       FormationMenu();
       break;
     case 2:
-      formation.EditFormation(formations);
+      EditFormation(formations);
       FormationMenu();
     case 3:
-      formation.DeleteFormation(formations);
+      DeleteFormation(formations);
       FormationMenu();
       break;
     default:
