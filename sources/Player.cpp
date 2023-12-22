@@ -16,4 +16,5 @@ Player::Player(string name, string pre_pos, string non_pre_pos) {
 
   this->pre_pos = pre_pos;
   this->non_pre_pos = non_pre_pos;
+  this->is_participating = true; //참여여부는 항상 true로 초기화 
 }
