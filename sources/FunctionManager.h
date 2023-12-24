@@ -13,7 +13,6 @@ string GetValidPosition(const string &prompt);  // 입력된 포지션 유효성 검사 및
 void InsertFormation(vector<Formation> &formations);  // 포메이션 추가
 void DeleteFormation(vector<Formation> &formations);  //포메이션 삭제
 void EditFormation(vector<Formation> &formations);    //포메이션 수정
-bool IsValidFormationInput(int def, int mid, int forward);
 
 // 현재 포메이션 정보를 표시하는 함수
 void DisplayFormation(const vector<Formation> &formations);
